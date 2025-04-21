@@ -1,3 +1,5 @@
+import type { Middleware } from "..";
+
 export function requireRole(role: string): Middleware {
 	return (ctx) => {
 		if (ctx.player.GetAttribute("role") === role) return { continue: true };

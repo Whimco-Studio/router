@@ -1,3 +1,5 @@
+import type { Middleware } from "..";
+
 export const routerLogger: Middleware = (ctx) => {
 	print(`[ROUTER] ${ctx.meta?.route} called by ${ctx.player.Name}`);
 	return { continue: true };

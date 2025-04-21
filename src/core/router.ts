@@ -1,5 +1,6 @@
 import type { t } from "@rbxts/t";
 import { ObjectUtilities } from "@rbxts/luau-polyfill";
+import type { Middleware, RegisteredRoute, RegisteredRouteFromSchema, RouteContext } from "..";
 
 const routeRegistry = new Map<string, RegisteredRoute<unknown>>();
 const globalMiddlewares: Middleware[] = [];
