@@ -1,7 +1,3 @@
-Your README is looking 🔥 already — here’s a lightly polished version that improves clarity, flow, and formatting while keeping everything in your voice and structure:
-
----
-
 # Router
 
 ### 📦 Types
