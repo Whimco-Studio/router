@@ -1,3 +1,5 @@
+import "./core/router";
+
 export * from "./core/router";
 export * from "./core/middleware";
 export * from "./core/permissions";
@@ -5,6 +7,14 @@ export * from "./core/context";
 export * from "./core/responses";
 export * from "./plugins/signal";
 export * from "./utils/deepClone";
+export * from "./utils/routerBridge";
+
+export type RegisteredRoutesMap = Record<
+	string,
+	{
+		schema: (value: unknown) => boolean | [boolean, string?];
+	}
+>;
 
 export type RouteContext<T = unknown> = {
 	player: Player;
