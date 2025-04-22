@@ -1,4 +1,5 @@
 import "./core/router";
+import { createRouterServer } from "./utils/routerBridge";
 
 export * from "./core/router";
 export * from "./core/middleware";
@@ -53,3 +54,5 @@ export type RegisteredRouteFromSchema<S extends (val: unknown) => unknown> = {
 	middleware?: Middleware[];
 	handler: RouteHandler<InferTType<S>>;
 };
+
+createRouterServer();

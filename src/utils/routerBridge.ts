@@ -5,7 +5,7 @@ import { ReplicatedStorage } from "@rbxts/services";
 import { handleRoute } from "../core/router";
 import type { RegisteredRoutesMap } from "..";
 
-export function createRouterServer(Routes: RegisteredRoutesMap) {
+export function createRouterServer() {
 	const remote = new Instance("RemoteFunction");
 	remote.Name = "Router";
 	remote.Parent = ReplicatedStorage;
