@@ -18,7 +18,6 @@ export function defineRoute<S extends (val: unknown) => boolean | [boolean, stri
 		middleware: route.middleware,
 		schema,
 	};
-	warn(newRoute);
 	return newRoute;
 }
 
@@ -40,10 +39,13 @@ export function registerRoutes<S extends (val: unknown) => unknown>(
 	routes: RegisteredRouteFromSchema<S>[],
 ) {
 	for (const route of routes) {
-		registerRoute({
-			...route,
+		const newRoute = {
 			name: `${namespace}:${route.name}`,
-		});
+			handler: route.handler,
+			middleware: route.middleware,
+			schema: route.schema,
+		};
+		registerRoute(newRoute);
 	}
 }
 
