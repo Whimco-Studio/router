@@ -1,6 +1,7 @@
 import { RunService } from "@rbxts/services";
 import "./core/router";
 import { createRouterServer } from "./utils/routerBridge";
+import type { t } from "@rbxts/t";
 
 export * from "./core/router";
 export * from "./core/middleware";
@@ -55,6 +56,16 @@ export type RegisteredRouteFromSchema<S extends (val: unknown) => unknown> = {
 	middleware?: Middleware[];
 	handler: RouteHandler<InferTType<S>>;
 };
+
+export interface Request<T> {
+	payload: t.static<T>;
+	player: Player;
+	meta?: {
+		timestamp?: number;
+		headers?: Record<string, string>;
+		[key: string]: unknown;
+	};
+}
 
 if (RunService.IsServer()) {
 	createRouterServer();
