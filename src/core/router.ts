@@ -12,7 +12,14 @@ export function defineRoute<S extends (val: unknown) => boolean | [boolean, stri
 	schema: S,
 	route: Omit<RegisteredRoute<t.static<typeof schema>>, "schema">,
 ): RegisteredRoute<t.static<typeof schema>> & { schema: S } {
-	return { ...route, schema };
+	const newRoute = {
+		name: route.name,
+		handler: route.handler,
+		middleware: route.middleware,
+		schema,
+	};
+	warn(newRoute);
+	return newRoute;
 }
 
 /**
