@@ -33,13 +33,13 @@ export type RouteHandler<T = unknown> = (ctx: RouteContext<T>) => unknown;
 
 export type MiddlewareResult = { continue: true } | { continue: false; error: string; code?: number };
 
-export type Middleware = (ctx: RouteContext) => MiddlewareResult;
+export type Middleware<T = unknown> = (ctx: RouteContext<T>) => MiddlewareResult;
 
 export type RegisteredRoute<T = unknown> = {
 	name: string;
 	schema?: (value: unknown) => boolean | [boolean, string?];
 	handler: RouteHandler<T>;
-	middleware?: Middleware[];
+	middleware?: Middleware<T>[];
 };
 
 export type InferTType<T> = T extends (val: unknown) => val is infer R
