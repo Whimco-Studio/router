@@ -13,8 +13,18 @@ export function connectWebSocket<T = unknown>(route: string): WebSocketClient<T>
 	let messageCallback: ((data: T) => void) | undefined;
 
 	const connection = event.OnClientEvent.Connect((msg) => {
-		if (msg.route === route && msg._type === "message") {
-			messageCallback?.(msg.payload);
+		const {
+			route: msgRoute,
+			_type,
+			payload,
+		} = msg as {
+			route: string;
+			_type: "subscribe" | "message" | "unsubscribe";
+			payload: T;
+		};
+
+		if (msgRoute === route && _type === "message") {
+			messageCallback?.(payload);
 		}
 	});
 
