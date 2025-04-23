@@ -15,11 +15,11 @@ export function connectWebSocket<T = unknown>(route: string): WebSocketClient<T>
 	const connection = event.OnClientEvent.Connect((msg) => {
 		const {
 			route: msgRoute,
-			_type,
+			type: _type,
 			payload,
 		} = msg as {
 			route: string;
-			_type: "subscribe" | "message" | "unsubscribe";
+			type: "subscribe" | "message" | "unsubscribe";
 			payload: T;
 		};
 

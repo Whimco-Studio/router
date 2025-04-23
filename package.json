@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/router",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"main": "out/init.lua",
 	"scripts": {
 		"build": "rbxtsc",
