@@ -1,8 +1,11 @@
-import { RunService } from "@rbxts/services";
-import "./core/router";
-import { createRouterServer } from "./utils/routerBridge";
 import type { t } from "@rbxts/t";
+import type { WebSocketContext } from "./core/websocket";
 
+import { RunService } from "@rbxts/services";
+import { createMockWebSocket } from "./core/websocket";
+import { createRouterServer } from "./utils/routerBridge";
+
+import "./core/router";
 export * from "./core/router";
 export * from "./core/middleware";
 export * from "./core/permissions";
@@ -11,6 +14,10 @@ export * from "./core/responses";
 export * from "./plugins/signal";
 export * from "./utils/deepClone";
 export * from "./utils/routerBridge";
+
+export function ws<T>(route: string, handler: (ctx: WebSocketContext<T>) => void) {
+	createMockWebSocket(route, handler);
+}
 
 export type RegisteredRoutesMap = Record<
 	string,
