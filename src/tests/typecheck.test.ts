@@ -6,26 +6,23 @@ const ExampleSchema = t.interface({
 	age: t.number,
 });
 
-registerRoute(
-	defineRoute(ExampleSchema, {
-		name: "example_1",
-		handler: ({ payload }) => {
-			print(payload.name);
-		},
-	}),
-);
+const getQuirkymalRoute = defineRoute(ExampleSchema, {
+	name: "get-quirkymal",
+	handler: ({ payload }) => {
+		print(payload.name);
+	},
+	middleware: [(ctx) => ({ continue: true })], // <-- this is causing the error
+});
 
-registerRoutes("example_2", [
-	defineRoute(ExampleSchema, {
-		name: "check age",
-		handler: ({ payload }) => {
-			print(payload.age);
-		},
-	}),
+registerRoute(getQuirkymalRoute);
+
+registerRoutes("example", [getQuirkymalRoute]);
+registerRoutes("example", [
+	getQuirkymalRoute,
 	defineRoute(ExampleSchema, {
 		name: "create",
 		handler: ({ payload }) => {
-			print(payload); // { age: 10, name: "test" }
+			print(payload.name);
 		},
 	}),
 ]);
