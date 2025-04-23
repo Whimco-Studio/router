@@ -30,9 +30,9 @@ function ensureConnection() {
 	connected = true;
 
 	event.OnServerEvent.Connect((player, msg) => {
-		const { route, type, payload } = msg as {
+		const { route, _type, payload } = msg as {
 			route: string;
-			type: "subscribe" | "message" | "unsubscribe";
+			_type: "subscribe" | "message" | "unsubscribe";
 			payload: unknown;
 		};
 
@@ -41,7 +41,7 @@ function ensureConnection() {
 
 		const { sessions, onMessageMap, onCloseMap, handler } = info;
 
-		if (type === "subscribe") {
+		if (_type === "subscribe") {
 			const ctx: WebSocketContext = {
 				player,
 				send: (data) => event.FireClient(player, { route, type: "message", payload: data }),
@@ -53,13 +53,13 @@ function ensureConnection() {
 			handler(ctx);
 		}
 
-		if (type === "message") {
+		if (_type === "message") {
 			const ctx = sessions.get(player);
 			const cb = ctx && onMessageMap.get(ctx);
 			if (cb) cb(payload);
 		}
 
-		if (type === "unsubscribe") {
+		if (_type === "unsubscribe") {
 			const ctx = sessions.get(player);
 			const closeCb = ctx && onCloseMap.get(ctx);
 			if (closeCb) closeCb();
