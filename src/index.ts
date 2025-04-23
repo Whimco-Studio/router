@@ -14,6 +14,7 @@ export * from "./core/responses";
 export * from "./plugins/signal";
 export * from "./utils/deepClone";
 export * from "./utils/routerBridge";
+export * from "./client/websocket";
 
 export function ws<T>(route: string, handler: (ctx: WebSocketContext<T>) => void) {
 	createMockWebSocket(route, handler);
