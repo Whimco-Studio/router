@@ -1,3 +1,4 @@
+import { RunService } from "@rbxts/services";
 import "./core/router";
 import { createRouterServer } from "./utils/routerBridge";
 
@@ -55,4 +56,6 @@ export type RegisteredRouteFromSchema<S extends (val: unknown) => unknown> = {
 	handler: RouteHandler<InferTType<S>>;
 };
 
-createRouterServer();
+if (RunService.IsServer()) {
+	createRouterServer();
+}

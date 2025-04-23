@@ -25,7 +25,7 @@ export function createRouterServer() {
 }
 
 // Client-side: returns strongly-typed route call proxy
-export function getRouterClient<R extends RegisteredRoutesMap>(Routes: R) {
+export function getRouterClient() {
 	ReplicatedStorage.WaitForChild("RouterFlag");
 	const client = ReplicatedStorage.WaitForChild("Router") as RemoteFunction;
 	return client;
