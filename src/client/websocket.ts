@@ -13,23 +13,23 @@ export function connectWebSocket<T = unknown>(route: string): WebSocketClient<T>
 	let messageCallback: ((data: T) => void) | undefined;
 
 	const connection = event.OnClientEvent.Connect((msg) => {
-		if (msg.route === route && msg.type === "message") {
+		if (msg.route === route && msg._type === "message") {
 			messageCallback?.(msg.payload);
 		}
 	});
 
 	// Send subscribe on init
-	event.FireServer({ route, type: "subscribe" });
+	event.FireServer({ route, _type: "subscribe" });
 
 	return {
 		send: (data: T) => {
-			event.FireServer({ route, type: "message", payload: data });
+			event.FireServer({ route, _type: "message", payload: data });
 		},
 		onMessage: (cb) => {
 			messageCallback = cb;
 		},
 		unsubscribe: () => {
-			event.FireServer({ route, type: "unsubscribe" });
+			event.FireServer({ route, _type: "unsubscribe" });
 			connection.Disconnect();
 		},
 	};
