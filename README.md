@@ -180,7 +180,6 @@ class PlayerViewSet extends ViewSet<typeof PlayerSchema> {
 }
 
 registerViewSet(new PlayerViewSet());
-
 ```
 
 ### Apps
@@ -197,3 +196,4 @@ app.include("api");
 ```
 
 ---
+
