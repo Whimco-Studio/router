@@ -15,6 +15,10 @@ export * from "./plugins/signal";
 export * from "./utils/deepClone";
 export * from "./utils/routerBridge";
 export * from "./client/websocket";
+export * from "./drf/serializer";
+export * from "./drf/models";
+export * from "./drf/viewsets";
+export * from "./drf/apps";
 
 export function ws<T>(route: string, handler: (ctx: WebSocketContext<T>) => void) {
 	createMockWebSocket(route, handler);
