@@ -146,3 +146,52 @@ middleware: [requireRole("admin")]
 ```
 
 ---
+
+## Django-Style Additions
+
+This package now provides lightweight abstractions inspired by Django REST Framework.
+
+### Serializers
+
+```ts
+import { Serializer } from "rest-core";
+import { t } from "@rbxts/t";
+
+const PlayerSchema = t.interface({
+        name: t.string,
+        age: t.number,
+});
+
+const PlayerSerializer = new Serializer(PlayerSchema);
+```
+
+### ViewSets
+
+```ts
+import { registerViewSet } from "rest-core";
+
+registerViewSet({
+        prefix: "players",
+        serializer: PlayerSerializer,
+        actions: {
+                create: ({ payload }) => {
+                        print(payload.name);
+                },
+        },
+});
+```
+
+### Apps
+
+```ts
+import { App } from "rest-core";
+
+const app = new App();
+app.addRoute({
+        name: "status",
+        handler: () => success("ok"),
+});
+app.include("api");
+```
+
+---

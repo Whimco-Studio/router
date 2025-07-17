@@ -8,9 +8,17 @@ export function requireRole(role: string): Middleware {
 }
 
 export function requireAuth(): Middleware {
-	return (ctx) => {
-		return ctx.player.GetAttribute("IsAuthenticated")
-			? { continue: true }
-			: { continue: false, error: "Unauthorized", code: 401 };
-	};
+        return (ctx) => {
+                return ctx.player.GetAttribute("IsAuthenticated")
+                        ? { continue: true }
+                        : { continue: false, error: "Unauthorized", code: 401 };
+        };
+}
+
+export function requireTokenAuth(token: string): Middleware {
+        return (ctx) => {
+                return ctx.player.GetAttribute("AuthToken") === token
+                        ? { continue: true }
+                        : { continue: false, error: "Unauthorized", code: 401 };
+        };
 }
