@@ -3,9 +3,34 @@
 	"version": "1.0.17",
 	"main": "out/init.lua",
 	"scripts": {
-		"build": "rbxtsc",
-		"watch": "rbxtsc -w",
-		"prepublishOnly": "npm run build"
+		"build": "rbxts-build build",
+		"watch": "rbxts-build watch",
+		"prepublishOnly": "npm run build",
+		"compile": "rbxts-build compile",
+		"open": "rbxts-build open",
+		"start": "rbxts-build start",
+		"stop": "rbxts-build stop",
+		"sync": "rbxts-build sync"
+	},
+	"rbxts-build": {
+		"rbxtscArgs": [
+			"--verbose",
+			"--optimizedLoops"
+		],
+		"rojoBuildArgs": [
+			"--output",
+			"game.rbxl"
+		],
+		"syncLocation": "src/types/services.d.ts",
+		"dev": false,
+		"wslUseExe": false,
+		"watchOnOpen": true,
+		"names": {
+			"build": "build",
+			"compile": "compile",
+			"open": "open",
+			"watch": "watch"
+		}
 	},
 	"keywords": [],
 	"author": "The_Pr0fessor",
@@ -30,7 +55,8 @@
 		"eslint-plugin-roblox-ts": "^0.0.36",
 		"prettier": "^3.5.3",
 		"roblox-ts": "^3.0.0",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"rbxts-build": "^2.4.0"
 	},
 	"dependencies": {
 		"@rbxts/deepcopy": "^0.1.3",
