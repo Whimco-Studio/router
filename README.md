@@ -168,17 +168,18 @@ const PlayerSerializer = new Serializer(PlayerSchema);
 ### ViewSets
 
 ```ts
-import { registerViewSet } from "rest-core";
+import { ViewSet, registerViewSet } from "rest-core";
 
-registerViewSet({
-        prefix: "players",
-        serializer: PlayerSerializer,
-        actions: {
-                create: ({ payload }) => {
-                        print(payload.name);
-                },
-        },
-});
+class PlayerViewSet extends ViewSet<typeof PlayerSchema> {
+        prefix = "players";
+        serializer = PlayerSerializer;
+
+        create({ payload }) {
+                print(payload.name);
+        }
+}
+
+registerViewSet(new PlayerViewSet());
 ```
 
 ### Apps
@@ -195,3 +196,4 @@ app.include("api");
 ```
 
 ---
+
